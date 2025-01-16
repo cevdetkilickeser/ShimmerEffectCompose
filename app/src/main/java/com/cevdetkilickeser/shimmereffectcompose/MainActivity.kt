@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.InfiniteRepeatableSpec
-import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -85,13 +84,13 @@ fun ShimmerItem(
                 .shimmerPlaceholder(isLoading),
             onSuccess = {
                 scope.launch {
-                    delay(2000) //Simulate loading delay
+                    delay(3000) //Simulate loading delay
                     isLoading = false
                 }
             },
             onError = {
                 scope.launch {
-                    delay(2000)
+                    delay(3000)
                     isLoading = false
                 }
             }
@@ -117,6 +116,10 @@ fun Modifier.shimmerPlaceholder(
         shape = shape,
         highlight = PlaceholderHighlight.shimmer(
             highlightColor = highlightColor,
+            animationSpec = InfiniteRepeatableSpec(
+                animation = tween(1000)
+            )
+
         )
     )
 }
